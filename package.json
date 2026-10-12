@@ -1,0 +1,13 @@
+{
+  "name": "nexus-suite",
+  "version": "1.0.0",
+  "description": "Nexus Suite - All-In-One Modern Web Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["dashboard", "ecommerce", "ai", "kanban", "portfolio"],
+  "author": "Antigravity",
+  "license": "MIT"
+}

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Suite - All-In-One Modern Web Platform</title>
+  <meta name="description" content="A modern, high-performance web platform featuring SaaS Analytics, E-Commerce Showcase, AI Studio, Kanban Board, and Developer Portfolio.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/><polyline points='2 12 12 17 22 12'/></svg>">
+</head>
+<body>
+
+  <!-- ========================================================================
+       TOP HEADER & GLOBAL NAVIGATION
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <!-- Brand Logo -->
+      <div class="brand-wrapper" onclick="App.switchModule('dashboard')">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="brand-text">NEXUS</div>
+        <span class="brand-badge">PRO v3.8</span>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" aria-label="Main Navigation">
+        <button class="nav-tab-btn active" data-target-module="dashboard" id="tabNavDashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-tab-btn" data-target-module="store" id="tabNavStore">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span>Store</span>
+        </button>
+        <button class="nav-tab-btn" data-target-module="ai-studio" id="tabNavAiStudio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+          <span>AI Studio</span>
+        </button>
+        <button class="nav-tab-btn" data-target-module="kanban" id="tabNavKanban">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="8.5" y1="3" x2="8.5" y2="21"></line><line x1="15.5" y1="3" x2="15.5" y2="21"></line></svg>
+          <span>Kanban</span>
+        </button>
+        <button class="nav-tab-btn" data-target-module="portfolio" id="tabNavPortfolio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Portfolio</span>
+        </button>
+      </nav>
+
+      <!-- Utilities & Actions -->
+      <div class="header-actions">
+        <!-- Quick Command Palette Trigger -->
+        <button class="btn-command-palette" id="openPaletteBtn" title="Search or jump to feature">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Quick actions</span>
+          <span class="kbd-shortcut">Ctrl+K</span>
+        </button>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button class="icon-btn" id="themeToggleBtn" title="Toggle theme">
+          <span id="themeToggleIcon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
+
+        <!-- Cart Drawer Button -->
+        <button class="icon-btn" id="openCartBtn" title="View Cart">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span class="badge-counter" id="headerCartCount" style="display: none;">0</span>
+        </button>
+
+        <!-- User Profile Pill -->
+        <div class="user-menu-btn" title="Alex Rivera (Admin)">
+          <div class="user-avatar">AR</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN APP WORKSPACE
+       ======================================================================== -->
+  <main class="main-wrapper">
+
+    <!-- ====================================================================
+         MODULE 1: SAAS ANALYTICS DASHBOARD
+         ==================================================================== -->
+    <section class="app-module active" id="module-dashboard">
+      <div class="module-header">
+        <div class="module-title-group">
+          <h1>Analytics & Revenue Telemetry</h1>
+          <p>Real-time metrics, live financial health, and customer acquisition overview.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button class="btn-secondary" onclick="App.showToast('📊 Report exported as CSV successfully')">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Export CSV
+          </button>
+          <button class="btn-primary" onclick="App.showToast('🔄 Synchronized telemetry endpoints')">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            Live Sync
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Stat Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-icon indigo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <span class="stat-badge positive">↑ +14.2%</span>
+          </div>
+          <div class="stat-title">Monthly Recurring Revenue</div>
+          <div class="stat-value" id="kpiLiveRevenue">$148,290</div>
+          <div class="stat-sub">+$18.4k vs previous month</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-icon emerald">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <span class="stat-badge positive">↑ +8.6%</span>
+          </div>
+          <div class="stat-title">Active Platform Users</div>
+          <div class="stat-value">48,210</div>
+          <div class="stat-sub">3,120 newly registered this week</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-icon cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+            </div>
+            <span class="stat-badge positive">↑ +1.2%</span>
+          </div>
+          <div class="stat-title">Conversion Rate</div>
+          <div class="stat-value">3.84%</div>
+          <div class="stat-sub">Top funnel SaaS benchmark: 2.5%</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-icon amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            </div>
+            <span class="stat-badge neutral">● Operational</span>
+          </div>
+          <div class="stat-title">Service Level Agreement</div>
+          <div class="stat-value">99.98%</div>
+          <div class="stat-sub">Average response time: 28ms</div>
+        </div>
+      </div>
+
+      <!-- Charts & Breakdown Section -->
+      <div class="dashboard-analytics-grid">
+        <!-- Interactive Chart Card -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 700;">Revenue vs Operating Expenses</h3>
+              <p style="font-size: 0.8125rem;">Solid line: Gross Revenue | Dashed line: Infrastructure Cost</p>
+            </div>
+            <div class="chart-pills">
+              <button class="chart-pill active" data-range="7D">7D</button>
+              <button class="chart-pill" data-range="30D">30D</button>
+              <button class="chart-pill" data-range="90D">90D</button>
+              <button class="chart-pill" data-range="1Y">1Y</button>
+            </div>
+          </div>
+          <div class="chart-wrapper">
+            <svg id="analyticsChartSvg" class="interactive-chart-svg"></svg>
+          </div>
+        </div>
+
+        <!-- Infrastructure & Traffic Breakdown -->
+        <div class="chart-card">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem;">Traffic & Resource Allocation</h3>
+          <p style="font-size: 0.8125rem; margin-bottom: 1rem;">Distributed cloud cluster bandwidth</p>
+
+          <div class="distribution-list">
+            <div class="dist-item">
+              <div class="dist-info">
+                <span>US-East (N. Virginia)</span>
+                <span style="color: var(--accent-primary);">48%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: 48%; background: var(--accent-primary);"></div>
+              </div>
+            </div>
+
+            <div class="dist-item">
+              <div class="dist-info">
+                <span>EU-Central (Frankfurt)</span>
+                <span style="color: var(--accent-cyan);">28%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: 28%; background: var(--accent-cyan);"></div>
+              </div>
+            </div>
+
+            <div class="dist-item">
+              <div class="dist-info">
+                <span>AP-Southeast (Singapore)</span>
+                <span style="color: var(--accent-emerald);">16%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: 16%; background: var(--accent-emerald);"></div>
+              </div>
+            </div>
+
+            <div class="dist-item">
+              <div class="dist-info">
+                <span>AP-East (Tokyo)</span>
+                <span style="color: var(--accent-amber);">8%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: 8%; background: var(--accent-amber);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Transactions Table -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 700;">Recent Transactions & Subscriptions</h3>
+            <p style="font-size: 0.8125rem;">Live billing ledger events across all channels.</p>
+          </div>
+          <div class="table-search">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="transactionSearch" placeholder="Filter customer...">
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Plan Tier</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="transactionTableBody">
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <div class="avatar-chip" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">SA</div>
+                    <div>
+                      <div style="font-weight: 700;">Sarah Jenkins</div>
+                      <div style="font-size: 0.75rem; color: var(--text-subtle);">sarah.j@acme.inc</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span style="font-weight: 600;">Enterprise Cluster</span></td>
+                <td><span style="font-weight: 700; color: var(--text-main);">$1,250.00</span></td>
+                <td><span class="status-pill success">● Settled</span></td>
+                <td style="color: var(--text-subtle);">Oct 12, 14:32</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <div class="avatar-chip" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">MR</div>
+                    <div>
+                      <div style="font-weight: 700;">Marcus Reed</div>
+                      <div style="font-size: 0.75rem; color: var(--text-subtle);">mreed@hypercloud.io</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span style="font-weight: 600;">Pro Team (Annual)</span></td>
+                <td><span style="font-weight: 700; color: var(--text-main);">$480.00</span></td>
+                <td><span class="status-pill success">● Settled</span></td>
+                <td style="color: var(--text-subtle);">Oct 12, 12:15</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <div class="avatar-chip" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">EL</div>
+                    <div>
+                      <div style="font-weight: 700;">Elena Rostova</div>
+                      <div style="font-size: 0.75rem; color: var(--text-subtle);">elena@quantumdev.tech</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span style="font-weight: 600;">Developer Seat</span></td>
+                <td><span style="font-weight: 700; color: var(--text-main);">$49.00</span></td>
+                <td><span class="status-pill processing">● Processing</span></td>
+                <td style="color: var(--text-subtle);">Oct 12, 10:48</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <div class="avatar-chip" style="background: linear-gradient(135deg, #10b981, #06b6d4);">DK</div>
+                    <div>
+                      <div style="font-weight: 700;">David Kim</div>
+                      <div style="font-size: 0.75rem; color: var(--text-subtle);">dkim@vortexlabs.ai</div>
+                    </div>
+                  </div>
+                </td>
+                <td><span style="font-weight: 600;">GPU Burst Add-On</span></td>
+                <td><span style="font-weight: 700; color: var(--text-main);">$320.00</span></td>
+                <td><span class="status-pill success">● Settled</span></td>
+                <td style="color: var(--text-subtle);">Oct 12, 09:20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MODULE 2: E-COMMERCE SHOWCASE
+         ==================================================================== -->
+    <section class="app-module" id="module-store">
+      <div class="module-header">
+        <div class="module-title-group">
+          <h1>Hardware & Pro Audio Marketplace</h1>
+          <p>Curated engineering tools, spatial sound gear, and ergonomic workspace accessories.</p>
+        </div>
+        <button class="btn-primary" onclick="document.getElementById('openCartBtn').click()">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          View Cart
+        </button>
+      </div>
+
+      <!-- Controls: Category Chips + Search & Sort -->
+      <div class="store-controls-bar">
+        <div class="category-filter-chips">
+          <button class="filter-chip active" data-category="all">All Products</button>
+          <button class="filter-chip" data-category="Audio">Audio</button>
+          <button class="filter-chip" data-category="Wearables">Wearables</button>
+          <button class="filter-chip" data-category="Tech & Gadgets">Tech & Gadgets</button>
+          <button class="filter-chip" data-category="Accessories">Accessories</button>
+        </div>
+
+        <div class="store-search-sort">
+          <div class="store-search-box">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="storeSearchInput" placeholder="Search gear...">
+          </div>
+
+          <select class="sort-select" id="storeSortSelect">
+            <option value="featured">Sort: Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Rendered dynamically by store.js -->
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MODULE 3: AI PROMPT & CHAT STUDIO
+         ==================================================================== -->
+    <section class="app-module" id="module-ai-studio">
+      <div class="module-header">
+        <div class="module-title-group">
+          <h1>AI Reasoning & Prompt Playground</h1>
+          <p>Multi-model reasoning studio with instant streaming simulation, prompt templates, and code analysis.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span class="brand-badge" id="totalTokensBadge">1,420 tokens</span>
+          <button class="btn-secondary" id="btnClearAiChat">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            Reset Chat
+          </button>
+        </div>
+      </div>
+
+      <div class="ai-studio-layout">
+        <!-- Left Sidebar: Models & Templates -->
+        <aside class="ai-sidebar">
+          <div>
+            <div class="ai-section-title">Select Intelligence Model</div>
+            <div id="aiModelCardsList">
+              <!-- Rendered dynamically by ai-studio.js -->
+            </div>
+          </div>
+
+          <div>
+            <div class="ai-section-title">Prompt Templates</div>
+            <div class="prompt-templates-list">
+              <button class="prompt-chip-btn" data-prompt-type="audit">
+                <span class="title">Security & Perf Code Audit</span>
+                <span>Analyze JavaScript code for memory & edge cases</span>
+              </button>
+              <button class="prompt-chip-btn" data-prompt-type="quantum">
+                <span class="title">Quantum Superposition</span>
+                <span>Break down advanced physics with code examples</span>
+              </button>
+              <button class="prompt-chip-btn" data-prompt-type="sql">
+                <span class="title">SQL Indexing Optimization</span>
+                <span>Optimize heavy join & high-traffic table lookups</span>
+              </button>
+              <button class="prompt-chip-btn" data-prompt-type="marketing">
+                <span class="title">SaaS Hero Copywriting</span>
+                <span>Write a high-converting, modern value proposition</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Main: Chat Interface -->
+        <div class="ai-chat-container">
+          <div class="ai-chat-header">
+            <div class="active-model-status">
+              <span class="status-dot-pulse"></span>
+              <span style="font-weight: 700; font-size: 0.9rem;" id="activeModelBadge">Gemini 3.8 Pro</span>
+              <span style="font-size: 0.75rem; color: var(--text-subtle);">• Streaming simulation active</span>
+            </div>
+            <button class="icon-btn" onclick="App.showToast('Copied full transcript to clipboard')" title="Copy conversation">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+          </div>
+
+          <div class="chat-messages-scroll" id="chatMessagesContainer">
+            <div class="message-bubble-wrapper ai">
+              <div class="chat-avatar ai">AI</div>
+              <div class="message-bubble">
+                Welcome to Nexus AI Studio! I can write and refactor code, design system architectures, run query optimizations, and draft copy.
+                <br><br>
+                Try clicking any of the <strong>Prompt Templates</strong> on the left or type your prompt below!
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-input-area">
+            <div class="chat-input-box">
+              <textarea id="aiChatInput" placeholder="Ask AI anything, or request code generation... (Shift+Enter for newline)"></textarea>
+              <button class="btn-primary" id="btnSendAiChat" style="padding: 0 1rem; border-radius: var(--radius-sm);">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MODULE 4: KANBAN BOARD
+         ==================================================================== -->
+    <section class="app-module" id="module-kanban">
+      <div class="module-header">
+        <div class="module-title-group">
+          <h1>Sprint & Task Management</h1>
+          <p>Drag and drop cards across columns to update development workflow status in real time.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <div class="store-search-box">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="kanbanSearchInput" placeholder="Filter tasks...">
+          </div>
+          <button class="btn-primary" onclick="App.openModal('newTaskModal')">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            New Task
+          </button>
+        </div>
+      </div>
+
+      <div class="kanban-board-wrapper">
+        <!-- Backlog / To Do -->
+        <div class="kanban-column">
+          <div class="kanban-column-header">
+            <div class="column-title-wrap">
+              <span class="column-indicator todo"></span>
+              <h4>Backlog</h4>
+            </div>
+            <span class="column-count" id="kanban-count-todo">0</span>
+          </div>
+          <div class="kanban-cards-container" id="kanban-cards-todo" data-status="todo"></div>
+        </div>
+
+        <!-- In Progress -->
+        <div class="kanban-column">
+          <div class="kanban-column-header">
+            <div class="column-title-wrap">
+              <span class="column-indicator in-progress"></span>
+              <h4>In Progress</h4>
+            </div>
+            <span class="column-count" id="kanban-count-in-progress">0</span>
+          </div>
+          <div class="kanban-cards-container" id="kanban-cards-in-progress" data-status="in-progress"></div>
+        </div>
+
+        <!-- Code Review -->
+        <div class="kanban-column">
+          <div class="kanban-column-header">
+            <div class="column-title-wrap">
+              <span class="column-indicator review"></span>
+              <h4>Review</h4>
+            </div>
+            <span class="column-count" id="kanban-count-review">0</span>
+          </div>
+          <div class="kanban-cards-container" id="kanban-cards-review" data-status="review"></div>
+        </div>
+
+        <!-- Done -->
+        <div class="kanban-column">
+          <div class="kanban-column-header">
+            <div class="column-title-wrap">
+              <span class="column-indicator done"></span>
+              <h4>Completed</h4>
+            </div>
+            <span class="column-count" id="kanban-count-done">0</span>
+          </div>
+          <div class="kanban-cards-container" id="kanban-cards-done" data-status="done"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MODULE 5: CREATIVE DEVELOPER & AGENCY PORTFOLIO
+         ==================================================================== -->
+    <section class="app-module" id="module-portfolio">
+      <!-- Hero Banner -->
+      <div class="portfolio-hero-banner">
+        <div class="portfolio-hero-content">
+          <div class="hero-supertag">
+            <span>●</span> AVAILABLE FOR HIGH-IMPACT ARCHITECTURE & PRODUCT ENGINEERING
+          </div>
+          <h1>Crafting <span class="gradient-text">World-Class Digital</span> Software & Systems</h1>
+          <p>
+            Hi, I'm Alex Rivera. Principal Full-Stack Architect & Product Designer specializing in distributed high-throughput web applications, reactive user interfaces, and generative AI interfaces.
+          </p>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="#contact-section" class="btn-primary" onclick="document.getElementById('portfolioContactForm')?.scrollIntoView({ behavior: 'smooth' });">
+              Start a Project ➔
+            </a>
+            <button class="btn-secondary" onclick="App.showToast('📄 Downloaded Alex_Rivera_Architect_Resume.pdf')">
+              Download CV
+            </button>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="hero-stat">
+              <h3>10+</h3>
+              <p>Years Experience</p>
+            </div>
+            <div class="hero-stat">
+              <h3>45+</h3>
+              <p>Shipped Products</p>
+            </div>
+            <div class="hero-stat">
+              <h3>1.2M+</h3>
+              <p>Active End Users</p>
+            </div>
+            <div class="hero-stat">
+              <h3>99.99%</h3>
+              <p>Service Reliability</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Project Showcases -->
+      <div class="portfolio-section-header">
+        <div>
+          <h2>Featured Case Studies & Work</h2>
+          <p>Real-world production engineering with measurable business and performance metrics.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-grid">
+        <!-- Project 1 -->
+        <div class="portfolio-card">
+          <div class="portfolio-thumbnail" style="background: linear-gradient(135deg, #1e1b4b, #312e81);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <div class="portfolio-info">
+            <div class="tech-tags">
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">WebAssembly</span>
+              <span class="tech-tag">ClickHouse</span>
+            </div>
+            <h3>Pulsar Real-Time Telemetry</h3>
+            <p>Visualizing 120,000 real-time events per second at 60 FPS using custom shaders and WebAssembly workers.</p>
+            <button class="btn-secondary" style="margin-top: auto;" onclick="openCaseStudy('pulsar')">
+              Read Deep-Dive Case Study ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="portfolio-card">
+          <div class="portfolio-thumbnail" style="background: linear-gradient(135deg, #022c22, #064e3b);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          </div>
+          <div class="portfolio-info">
+            <div class="tech-tags">
+              <span class="tech-tag">React 19</span>
+              <span class="tech-tag">Tailwind</span>
+              <span class="tech-tag">PyTorch</span>
+            </div>
+            <h3>Aurora Generative AI Design Studio</h3>
+            <p>Generative UI platform transforming natural language specifications into fully verified design system components.</p>
+            <button class="btn-secondary" style="margin-top: auto;" onclick="openCaseStudy('aurora')">
+              Read Deep-Dive Case Study ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="portfolio-card">
+          <div class="portfolio-thumbnail" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <div class="portfolio-info">
+            <div class="tech-tags">
+              <span class="tech-tag">Go</span>
+              <span class="tech-tag">gRPC</span>
+              <span class="tech-tag">Kubernetes</span>
+            </div>
+            <h3>Vortex Distributed Task Orchestrator</h3>
+            <p>Distributed job scheduling engine with automated idempotent retries, handling millions of background tasks daily.</p>
+            <button class="btn-secondary" style="margin-top: auto;" onclick="openCaseStudy('vortex')">
+              Read Deep-Dive Case Study ➔
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Breakdown & Interactive Contact Split -->
+      <div class="portfolio-split-grid" id="contact-section">
+        <!-- Technical Mastery -->
+        <div class="skills-card">
+          <h2>Technical Core & Capabilities</h2>
+          <p>Architectural proficiencies honed across decade-long product lifecycles.</p>
+
+          <div class="skills-bars-list">
+            <div class="skill-bar-item">
+              <div class="skill-bar-head">
+                <span>Frontend Architecture (Modern JS, HTML5, Vanilla CSS)</span>
+                <span style="color: var(--accent-primary);">98%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: 98%; background: var(--accent-primary);"></div>
+              </div>
+            </div>
+
+            <div class="skill-bar-item">
+              <div class="skill-bar-head">
+                <span>Distributed Backend Systems (Node, Go, Python)</span>
+                <span style="color: var(--accent-cyan);">94%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: 94%; background: var(--accent-cyan);"></div>
+              </div>
+            </div>
+
+            <div class="skill-bar-item">
+              <div class="skill-bar-head">
+                <span>Cloud Infrastructure & Orchestration (Docker, K8s, AWS)</span>
+                <span style="color: var(--accent-emerald);">90%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: 90%; background: var(--accent-emerald);"></div>
+              </div>
+            </div>
+
+            <div class="skill-bar-item">
+              <div class="skill-bar-head">
+                <span>Generative AI Integrations & Prompt Engineering</span>
+                <span style="color: var(--accent-amber);">92%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: 92%; background: var(--accent-amber);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact & Inquiry Form -->
+        <div class="contact-card">
+          <h2>Initiate Project Inquiry</h2>
+          <p>Looking to build or scale something extraordinary? Let's connect.</p>
+
+          <form class="contact-form" id="portfolioContactForm">
+            <div class="form-group">
+              <label for="contactName">Your Name</label>
+              <input type="text" id="contactName" required placeholder="Elena Vance">
+            </div>
+
+            <div class="form-group">
+              <label for="contactEmail">Email Address</label>
+              <input type="email" id="contactEmail" required placeholder="elena@company.com">
+            </div>
+
+            <div class="form-group">
+              <label for="contactBudget">Estimated Project Budget</label>
+              <select id="contactBudget" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.65rem 0.85rem; color: var(--text-main); outline: none;">
+                <option value="10k-25k">$10,000 – $25,000</option>
+                <option value="25k-50k" selected>$25,000 – $50,000</option>
+                <option value="50k-100k">$50,000 – $100,000+</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Project Scope & Timeline</label>
+              <textarea id="contactMessage" rows="4" required placeholder="Describe your product requirements, target deadlines, and key objectives..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="justify-content: center; margin-top: 0.5rem;">
+              Send Inquiry ➔
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       SLIDE-OVER CART DRAWER
+       ======================================================================== -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    <div class="cart-drawer-header">
+      <h3 style="font-size: 1.15rem; font-weight: 700;">Shopping Cart</h3>
+      <button class="icon-btn" id="closeCartBtn" title="Close cart">✕</button>
+    </div>
+
+    <div class="cart-drawer-body" id="cartDrawerItems">
+      <!-- Items dynamically populated by store.js -->
+    </div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-summary-line">
+        <span>Estimated Subtotal</span>
+        <strong id="cartSubtotal">$0.00</strong>
+      </div>
+      <div class="cart-summary-line">
+        <span>Estimated Taxes (8%)</span>
+        <span>Included</span>
+      </div>
+      <div class="cart-summary-line total">
+        <span>Grand Total</span>
+        <strong id="cartGrandTotal">$0.00</strong>
+      </div>
+
+      <button class="btn-primary" id="btnProceedCheckout" style="justify-content: center; width: 100%;">
+        Proceed to Checkout ➔
+      </button>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       GLOBAL COMMAND PALETTE MODAL (Ctrl+K)
+       ======================================================================== -->
+  <div class="modal-overlay" id="commandPaletteModal">
+    <div class="modal-container">
+      <div class="palette-input-wrap">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="paletteSearchInput" placeholder="Type a command or jump to feature...">
+        <button data-close-modal class="icon-btn" style="width: 28px; height: 28px; font-size: 0.75rem;">ESC</button>
+      </div>
+      <div class="palette-results-list" id="paletteResultsList">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: QUICK VIEW PRODUCT
+       ======================================================================== -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="modal-container" style="max-width: 640px; padding: 2rem;">
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem;">
+        <button data-close-modal class="icon-btn" style="width: 32px; height: 32px;">✕</button>
+      </div>
+      <div id="quickViewContent">
+        <!-- Injected by store.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: CHECKOUT SIMULATION
+       ======================================================================== -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-container" style="max-width: 520px; padding: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 800;">Simulated Secure Checkout</h3>
+        <button data-close-modal class="icon-btn" style="width: 32px; height: 32px;">✕</button>
+      </div>
+      <form onsubmit="event.preventDefault(); StoreModule.completeOrder();">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label>Full Shipping Name</label>
+          <input type="text" required value="Alex Rivera">
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label>Delivery Address</label>
+          <input type="text" required value="742 Evergreen Terrace, Tech District">
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label>Payment Method (Simulated 256-bit SSL)</label>
+          <input type="text" required value="•••• •••• •••• 4242">
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+          Pay & Confirm Order
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: NEW KANBAN TASK
+       ======================================================================== -->
+  <div class="modal-overlay" id="newTaskModal">
+    <div class="modal-container" style="max-width: 480px; padding: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 800;">Create Sprint Task</h3>
+        <button data-close-modal class="icon-btn" style="width: 32px; height: 32px;">✕</button>
+      </div>
+      <form id="newTaskForm">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="taskInputTitle">Task Title</label>
+          <input type="text" id="taskInputTitle" required placeholder="e.g. Implement WebRTC video signaling">
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label for="taskInputDesc">Description</label>
+          <textarea id="taskInputDesc" rows="3" placeholder="Context, acceptance criteria, or PR link..."></textarea>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="form-group">
+            <label for="taskInputPriority">Priority</label>
+            <select id="taskInputPriority" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.65rem 0.85rem; color: var(--text-main);">
+              <option value="high">High</option>
+              <option value="medium" selected>Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="taskInputStatus">Initial Column</label>
+            <select id="taskInputStatus" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.65rem 0.85rem; color: var(--text-main);">
+              <option value="todo" selected>Backlog</option>
+              <option value="in-progress">In Progress</option>
+              <option value="review">Review</option>
+              <option value="done">Completed</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+          Create Task Card
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: CASE STUDY DEEP DIVE
+       ======================================================================== -->
+  <div class="modal-overlay" id="caseStudyModal">
+    <div class="modal-container" style="max-width: 640px; padding: 2rem;">
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem;">
+        <button data-close-modal class="icon-btn" style="width: 32px; height: 32px;">✕</button>
+      </div>
+      <div id="caseStudyModalBody">
+        <!-- Injected by portfolio.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       TOAST ALERTS CONTAINER
+       ======================================================================== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/dashboard.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ai-studio.js"></script>
+  <script src="js/kanban.js"></script>
+  <script src="js/portfolio.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
